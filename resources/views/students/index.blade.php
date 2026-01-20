@@ -1,56 +1,69 @@
 @extends('layout')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h2>Student List</h2>
-    <a href="{{ route('students.create') }}" class="btn btn-success">Add New Student</a>
-</div>
 
-@if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 style="color: #4a3b2a;">Student List</h2>
+        <a href="{{ route('students.create') }}" class="btn text-white" style="background-color: #bc6c25;">
+           Add New Student
+        </a>
+    </div>
 
-<table class="table table-bordered table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Course</th>
-            <th>Year Level</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>John Doe</td>
-            <td>BS Information Technology</td>
-            <td>3rd Year</td>
-            <td>
-                <a href="{{ route('students.show', 1) }}" class="btn btn-info btn-sm text-white">View</a>
-                <a href="{{ route('students.edit', 1) }}" class="btn btn-warning btn-sm">Edit</a>
-            </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Jane Doe</td>
-            <td>BS Computer Science</td>
-            <td>2nd Year</td>
-            <td>
-                <a href="{{ route('students.show', 2) }}" class="btn btn-info btn-sm text-white">View</a>
-                <a href="{{ route('students.edit', 2) }}" class="btn btn-warning btn-sm">Edit</a>
-            </td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Jose Doe</td>
-            <td>BS Engineering</td>
-            <td>4th Year</td>
-            <td>
-                <a href="{{ route('students.show', 3) }}" class="btn btn-info btn-sm text-white">View</a>
-                <a href="{{ route('students.edit', 3) }}" class="btn btn-warning btn-sm">Edit</a>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    @if(session('success'))
+        <div class="alert" style="background-color: #dda15e; color: #4a3b2a; border-color: #bc6c25;">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <div class="card shadow-sm border-0">
+        <table class="table table-custom mb-0">
+            <thead>
+                <tr>
+                    <th class="py-3">ID</th>
+                    <th class="py-3">Name</th>
+                    <th class="py-3">Course</th>
+                    <th class="py-3">Year Level</th>
+                    <th class="py-3">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="py-3">1</td>
+                    <td class="py-3">John Doe</td>
+                    <td class="py-3">BS Information Technology</td>
+                    <td class="py-3">3rd Year</td>
+                    <td class="py-3">
+                        <x-action-button type="view" href="{{ route('students.show', 1) }}" />
+                        <x-action-button type="edit" href="{{ route('students.edit', 1) }}" />
+                        <x-action-button type="delete" href="#" /> 
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="py-3">2</td>
+                    <td class="py-3">Jane Doe</td>
+                    <td class="py-3">BS Computer Science</td>
+                    <td class="py-3">2nd Year</td>
+                    <td class="py-3">
+                        <x-action-button type="view" href="{{ route('students.show', 2) }}" />
+                        <x-action-button type="edit" href="{{ route('students.edit', 2) }}" />
+                        <x-action-button type="delete" href="#" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="py-3">3</td>
+                    <td class="py-3">Jose Doe</td>
+                    <td class="py-3">BS Engineering</td>
+                    <td class="py-3">4th Year</td>
+                    <td class="py-3">
+                        <x-action-button type="view" href="{{ route('students.show', 3) }}" />
+                        <x-action-button type="edit" href="{{ route('students.edit', 3) }}" />
+                        <x-action-button type="delete" href="#" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
 @endsection
