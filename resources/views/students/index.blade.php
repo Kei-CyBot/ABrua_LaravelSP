@@ -27,41 +27,34 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="py-3">1</td>
-                    <td class="py-3">John Doe</td>
-                    <td class="py-3">BS Information Technology</td>
-                    <td class="py-3">3rd Year</td>
-                    <td class="py-3">
-                        <x-action-button type="view" href="{{ route('students.show', 1) }}" />
-                        <x-action-button type="edit" href="{{ route('students.edit', 1) }}" />
-                        <x-action-button type="delete" href="#" /> 
-                    </td>
-                </tr>
+                @if($students->isEmpty())
+                    <tr>
+                        <td colspan="5" class="text-center py-4">No students found. Click "Add New Student" to start!</td>
+                    </tr>
+                @else
+                    @foreach($students as $student)
+                    <tr>
+                        <td class="py-3">{{ $loop->iteration }}</td>
+                        <td class="py-3">{{ $student->name }}</td>
+                        <td class="py-3">{{ $student->course }}</td>
+                        <td class="py-3">{{ $student->year_level }}</td>
+                        <td class="py-3">
+                            <x-action-button type="view" href="{{ route('students.show', $student->id) }}" />
+                            
+                            <x-action-button type="edit" href="{{ route('students.edit', $student->id) }}" />
 
-                <tr>
-                    <td class="py-3">2</td>
-                    <td class="py-3">Jane Doe</td>
-                    <td class="py-3">BS Computer Science</td>
-                    <td class="py-3">2nd Year</td>
-                    <td class="py-3">
-                        <x-action-button type="view" href="{{ route('students.show', 2) }}" />
-                        <x-action-button type="edit" href="{{ route('students.edit', 2) }}" />
-                        <x-action-button type="delete" href="#" />
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="py-3">3</td>
-                    <td class="py-3">Jose Doe</td>
-                    <td class="py-3">BS Engineering</td>
-                    <td class="py-3">4th Year</td>
-                    <td class="py-3">
-                        <x-action-button type="view" href="{{ route('students.show', 3) }}" />
-                        <x-action-button type="edit" href="{{ route('students.edit', 3) }}" />
-                        <x-action-button type="delete" href="#" />
-                    </td>
-                </tr>
+                            <form action="{{ route('students.destroy', $student->id) }}" method="POST" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-delete action-btn-base" 
+                                        onclick="return confirm('Are you sure you want to delete {{ $student->name }}?')">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>
